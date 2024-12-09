@@ -1,0 +1,1105 @@
+elseif v939 == "Five Season Atk" then
+        local l_char_30 = v938.char;
+        local _ = v938.id;
+        local _ = v938.bp;
+        local l_PrimaryPart_50 = l_char_30.PrimaryPart;
+        local _ = tick();
+        local v10626 = 0;
+        local v10627 = nil;
+        local v10628 = 0;
+        local v10629 = tick();
+        local l_Character_17 = l_LocalPlayer_0.Character;
+        local l_PrimaryPart_51 = l_char_30.PrimaryPart;
+        local l_BodyVelocity_8 = Instance.new("BodyVelocity");
+        l_BodyVelocity_8.MaxForce = Vector3.new(1, 1, 1, 0) * 400000000;
+        l_BodyVelocity_8.Velocity = Vector3.new(0, 0, 0, 0);
+        l_BodyVelocity_8.Parent = l_PrimaryPart_51;
+        local v10633 = nil;
+        local v10634 = false;
+        do
+            local l_v10626_0, l_v10627_0, l_v10628_0, l_v10633_0, l_v10634_0 = v10626, v10627, v10628, v10633, v10634;
+            if l_LocalPlayer_0.Character == l_char_30 then
+                local l_CurrentCamera_9 = workspace.CurrentCamera;
+               
+                local v10641 = FSATK or require(l_Cutscenes_0["Five Season Attack"]);
+                if not FSATK then
+                    FSATK = v10641;
+                end;
+                local l_l_CurrentCamera_9_0 = l_CurrentCamera_9 --[[ copy: 18 -> 93 ]];
+                l_v10627_0 = game:GetService("RunService").RenderStepped:Connect(function(v10643) --[[ Line: 17930 ]]
+                    local v10644 = v10643 * 60;
+                    l_v10626_0 = l_v10626_0 + v10644;
+                    local v10645 = tonumber((math.ceil(l_v10626_0)));
+                    if v10645 >= 198 and v10645 <= 200 then
+                        v10645 = 197;
+                    end;
+                    local v10646 = v10641[v10645];
+                    if l_Character_17.Parent and v10646 and not l_v10634_0 then
+                        if l_l_CurrentCamera_9_0.CameraType ~= Enum.CameraType.Scriptable then
+                            l_l_CurrentCamera_9_0.CameraType = Enum.CameraType.Scriptable;
+                        end;
+                        local _ = v10645;
+                        l_v10628_0 = l_v10628_0 + v10644;
+                        if v10646 then
+                            if tick() - v10629 > 0.7 then
+                                l_l_CurrentCamera_9_0.FieldOfView = v10646.fov;
+                            else
+                                local l_l_l_CurrentCamera_9_0_0 = l_l_CurrentCamera_9_0;
+                                local l_FieldOfView_3 = l_l_CurrentCamera_9_0.FieldOfView;
+                                local l_fov_1 = v10646.fov;
+                                local v10651 = 1 - 0.009 ^ v10643;
+                                l_l_l_CurrentCamera_9_0_0.FieldOfView = l_FieldOfView_3 + (l_fov_1 - l_FieldOfView_3) * v10651;
+                            end;
+                        end;
+                        if v10646 then
+                            local v10652 = (stored or l_PrimaryPart_51.CFrame) * v10646.cframe;
+                            local v10653 = nil;
+                            if l_v10633_0 and (l_v10633_0.Position - v10652.Position).magnitude >= 10 then
+                                v10653 = true;
+                            end;
+                            l_v10633_0 = v10652;
+                            if v10653 then
+                                l_l_CurrentCamera_9_0.CFrame = v10652;
+                                return;
+                            elseif tick() - v10629 > 0.7 then
+                                l_l_CurrentCamera_9_0.CFrame = l_PrimaryPart_51.CFrame * v10646.cframe;
+                                return;
+                            else
+                                l_l_CurrentCamera_9_0.CFrame = l_l_CurrentCamera_9_0.CFrame:lerp(l_PrimaryPart_51.CFrame * v10646.cframe, 1 - 9.0E-5 ^ v10643);
+                                return;
+                            end;
+                        end;
+                    else
+                        l_v10627_0:Disconnect();
+               
+                        l_l_CurrentCamera_9_0.CameraType = Enum.CameraType.Custom;
+                        v10:Create(l_l_CurrentCamera_9_0, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            FieldOfView = 70
+                        }):Play();
+                    end;
+                end);
+            end;
+            local l_TweenService_15 = game:GetService("TweenService");
+            local l_FiveSeasonsFX_0 = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX;
+            local l_Thrown_17 = workspace.Thrown;
+            local v10657 = nil;
+            local v10658 = nil;
+            local v10659 = nil;
+            local v10660 = nil;
+            local v10661 = nil;
+            if l_LocalPlayer_0.Character == l_char_30 then
+                v10657 = l_FiveSeasonsFX_0.FXUi:Clone();
+                v10658 = v10657.Vignette;
+                v10659 = v10657.Punches;
+                v10660 = v10657.FiveSeasons;
+                v10661 = v10657.FiveSeasonsDots;
+                v10661.ImageTransparency = 1;
+            end;
+            task.delay(1.25, function() --[[ Line: 18008 ]]
+                local v10662 = l_FiveSeasonsFX_0.CharFX.FinalArmFXMirrored:Clone();
+                v10662.Parent = l_char_30["Left Arm"];
+                task.wait(0.75);
+                for _, v10664 in pairs(v10662:GetChildren()) do
+                    if v10664:IsA("ParticleEmitter") then
+                        v10664.Enabled = false;
+                    end;
+                end;
+                task.wait(1);
+                v10662:Destroy();
+            end);
+            task.delay(1.35, function() --[[ Line: 18017 ]]
+                if l_LocalPlayer_0.Character ~= l_char_30 then
+                    return;
+                else
+                    local l_Vignette_0 = v10657.Vignette;
+                    v10657.Parent = l_LocalPlayer_0.PlayerGui;
+                    l_TweenService_15:Create(l_Vignette_0, TweenInfo.new(0.55, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+                        ImageTransparency = 0
+                    }):Play();
+                    return;
+                end;
+            end);
+            task.delay(1.05, function() --[[ Line: 18025 ]]
+                local v10666 = l_FiveSeasonsFX_0.CharFX.TP:Clone();
+                v10666.Parent = l_char_30.Torso;
+                for _, v10668 in pairs(v10666:GetChildren()) do
+                    if v10668:IsA("ParticleEmitter") then
+                        v10668:Emit(v10668:GetAttribute("EmitCount"));
+                    end;
+                end;
+                task.wait(0.5);
+                v10666:Destroy();
+            end);
+            task.delay(1.983, function() --[[ Line: 18033 ]]
+                if v10657 then
+                    v10657.Vignette.Visible = false;
+                end;
+                shared.sfx({
+                    SoundId = "rbxassetid://18461821277", 
+                    Parent = l_char_30 ~= l_LocalPlayer_0.Character and l_char_30.Head or workspace, 
+                    Volume = 3
+                }):Play();
+                for _, v10670 in pairs(v9:GetTagged("kjfs" .. l_char_30.Name)) do
+                    v10670:Destroy();
+                end;
+                if v10657 then
+                    v10660.Visible = true;
+                    v10660.ImageTransparency = 1;
+                    v10660.ImageColor3 = Color3.fromRGB(0, 0, 0);
+                    l_TweenService_15:Create(v10660, TweenInfo.new(0.005, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                        ImageTransparency = 0
+                    }):Play();
+                    l_TweenService_15:Create(v10660, TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                        ImageColor3 = Color3.fromRGB(255, 255, 255)
+                    }):Play();
+                    v10661.Visible = true;
+                    l_TweenService_15:Create(v10661, TweenInfo.new(1.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+                        ImageTransparency = 0
+                    }):Play();
+                end;
+                task.wait(1.7);
+                local v10671 = nil;
+                if v10657 then
+                    v10660.Visible = false;
+                    v10661.Visible = false;
+                    v10671 = l_FiveSeasonsFX_0.GrayScale:Clone();
+                    v10671.Parent = game.Lighting;
+                    l_TweenService_15:Create(v10671, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                        Brightness = 0, 
+                        Contrast = 0, 
+                        Saturation = 0
+                    }):Play();
+                end;
+                local v10672 = l_FiveSeasonsFX_0.FistsModelMirrored:Clone();
+                v10672:SetPrimaryPartCFrame(l_char_30.HumanoidRootPart.CFrame);
+                task.delay(4.5, function() --[[ Line: 18071 ]]
+                    v10672:Destroy();
+                end);
+                if l_LocalPlayer_0.Character ~= l_char_30 then
+                    task.wait(1.45);
+                end;
+                v10672.Parent = l_Thrown_17;
+                shared.sfx({
+                    SoundId = "rbxassetid://18462018744", 
+                    Parent = v10672.PrimaryPart, 
+                    RollOffMaxDistance = 5000, 
+                    Volume = 10, 
+                    RollOffMode = Enum.RollOffMode.LinearSquare
+                }):Play();
+                local l_Primary_0 = v10672.Primary;
+                task.delay(0.065, function() --[[ Line: 18089 ]]
+                    v10672.Ring1.Start.Transparency = 0.6;
+                    l_TweenService_15:Create(v10672.Ring1.Start, TweenInfo.new(0.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Size = v10672.Ring1.End.Size
+                    }):Play();
+                    l_TweenService_15:Create(v10672.Ring1.Start, TweenInfo.new(0.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        CFrame = v10672.Ring1.End.CFrame
+                    }):Play();
+                    l_TweenService_15:Create(v10672.Ring1.Start, TweenInfo.new(0.55, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                        Transparency = 1
+                    }):Play();
+                    task.wait(0.15);
+                    v10672.Ring2.Start.Transparency = 0.6;
+                    l_TweenService_15:Create(v10672.Ring2.Start, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Size = v10672.Ring2.End.Size
+                    }):Play();
+                    l_TweenService_15:Create(v10672.Ring2.Start, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        CFrame = v10672.Ring2.End.CFrame
+                    }):Play();
+                    l_TweenService_15:Create(v10672.Ring2.Start, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                        Transparency = 1
+                    }):Play();
+                end);
+                for _, v10675 in pairs(l_Primary_0:GetDescendants()) do
+                    if v10675:IsA("ParticleEmitter") then
+                        task.spawn(function() --[[ Line: 18103 ]]
+                            l_TweenService_15:Create(v10675, TweenInfo.new(1.92, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                                TimeScale = 0.1
+                            }):Play();
+                            if l_LocalPlayer_0.Character ~= l_char_30 then
+
+                            end;
+                            task.wait(1.92);
+                            v10675.TimeScale = 1;
+                            v10675.Enabled = false;
+                        end);
+                    end;
+                end;
+                for _, v10677 in pairs(v10672.Fists:GetDescendants()) do
+                    if v10677:IsA("MeshPart") or v10677:IsA("BasePart") then
+                        task.spawn(function() --[[ Line: 18119 ]]
+                            local v10678 = Random.new():NextNumber(1.92, 1.88);
+                            l_TweenService_15:Create(v10677, TweenInfo.new(v10678, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+                                Position = v10677.Position + l_Primary_0.CFrame.LookVector * 28
+                            }):Play();
+                            if l_LocalPlayer_0.Character ~= l_char_30 then
+
+                            end;
+                            task.wait(v10678);
+                            l_TweenService_15:Create(v10677, TweenInfo.new(Random.new():NextNumber(0.23, 0.2), Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                                Position = v10677.Position + l_Primary_0.CFrame.LookVector * 800
+                            }):Play();
+                        end);
+                    end;
+                end;
+                for _, v10680 in pairs(v10672.Fists:GetDescendants()) do
+                    if v10680:IsA("MeshPart") and v10680.Name == "Main" then
+                        local v10681 = v10680:Clone();
+                        v10681.Parent = l_Thrown_17;
+                        v10681.Color = Color3.fromRGB(66, 4, 4);
+                        local v10682 = Random.new():NextNumber(0.45, 0.55);
+                        if l_LocalPlayer_0.Character ~= l_char_30 then
+
+                        end;
+                        l_TweenService_15:Create(v10681, TweenInfo.new(v10682, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {
+                            Transparency = 1, 
+                            Size = v10680.Size * 1.085
+                        }):Play();
+                        task.delay(1, function() --[[ Line: 18146 ]]
+                            v10681:Destroy();
+                        end);
+                    end;
+                end;
+                task.wait(1.92);
+                if v10671 then
+                    v10671:Destroy();
+                end;
+                local v10683 = nil;
+                local v10684 = nil;
+                local v10685 = nil;
+                if v10657 then
+                    v10683 = l_FiveSeasonsFX_0.FistsCC.FSRed:Clone();
+                    v10683.Parent = game.Lighting;
+                    v10684 = l_FiveSeasonsFX_0.FistsCC.FSWhite:Clone();
+                    v10684.Parent = game.Lighting;
+                    v10685 = l_FiveSeasonsFX_0.FistsCC.FSBlack:Clone();
+                    v10685.Parent = game.Lighting;
+                end;
+                task.wait(0.008);
+                if v10657 then
+                    v10684.Enabled = true;
+                end;
+                task.wait(0.02);
+                if v10657 then
+                    v10684.Enabled = false;
+                    v10685.Enabled = true;
+                end;
+                task.wait(0.02);
+                if v10657 then
+                    v10685.Enabled = false;
+                    v10683:Destroy();
+                    v10684:Destroy();
+                    v10685:Destroy();
+                end;
+                if v10657 then
+                    v10657.White.Visible = true;
+                    v10657.White.ImageTransparency = 0;
+                    l_TweenService_15:Create(v10657.White, TweenInfo.new(0.18, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                        ImageTransparency = 1
+                    }):Play();
+                end;
+                local v10686 = nil;
+                local v10687 = 1;
+                local v10688 = nil;
+                if v10657 then
+                    shared.sfx({
+                        SoundId = "rbxassetid://18462312002", 
+                        Parent = workspace, 
+                        Volume = 7
+                    }):Play();
+                    v10688 = v10657.ImpactFrames:GetChildren();
+                    table.sort(v10688, function(v10689, v10690) --[[ Line: 18205 ]]
+                        local v10691 = tonumber(v10689.Name);
+                        local v10692 = tonumber(v10690.Name);
+                        if v10691 and v10692 then
+                            return v10691 < v10692;
+                        else
+                            return tostring(v10689.Name) < tostring(v10690.Name);
+                        end;
+                    end);
+                else
+                    v10688 = {};
+                    for v10693 = 1, 40 do
+                        table.insert(v10688, v10693);
+                    end;
+                end;
+                if l_LocalPlayer_0.Character == l_char_30 then
+                    shared.loop(function(v10694) --[[ Line: 18222 ]]
+                        local v10695 = v10688[v10687];
+                        if v10695 then
+                            if typeof(v10695) == "Instance" then
+                                v10695.Size = UDim2.new(1, 0, 1, 0);
+                            end;
+                        else
+                            l_v10634_0 = true;
+                            v10694();
+                        end;
+                        if v10686 and typeof(v10686) == "Instance" then
+                            v10686:Destroy();
+                        end;
+                        v10686 = v10695;
+                        v10687 = v10687 + 1;
+                    end, 26, true);
+                    l_LocalPlayer_0.CameraMinZoomDistance = 85;
+                    l_TweenService_15:Create(l_LocalPlayer_0, TweenInfo.new(2, Enum.EasingStyle.Sine), {
+                        CameraMinZoomDistance = 0.05
+                    }):Play();
+                    local v10696 = tick();
+                    local l_CurrentCamera_10 = workspace.CurrentCamera;
+                    local v10698 = nil;
+                    local l_v10696_0 = v10696 --[[ copy: 9 -> 18 ]];
+                    local l_l_CurrentCamera_10_0 = l_CurrentCamera_10 --[[ copy: 10 -> 19 ]];
+                    do
+                        local l_v10698_0 = v10698;
+                        l_v10698_0 = game:GetService("RunService").Heartbeat:Connect(function() --[[ Line: 18241 ]]
+                            if tick() - l_v10696_0 > 0.15 then
+                                return l_v10698_0:Disconnect();
+                            else
+                                l_l_CurrentCamera_10_0.CFrame = CFrame.new(l_l_CurrentCamera_10_0.CFrame.Position, (l_PrimaryPart_50.CFrame * CFrame.new(0, -40, 0)).Position);
+                                return;
+                            end;
+                        end);
+                    end;
+                else
+                    task.wait(0.075);
+                end;
+                game:GetService("Debris"):AddItem(l_BodyVelocity_8, 2);
+                local _ = game:GetService("TweenService");
+                local v10703, v10704 = v595({
+                    orig = l_PrimaryPart_50.Position, 
+                    dir = Vector3.new(0, -1000, 0, 0)
+                });
+                v10704 = if not v10703 then (l_PrimaryPart_50.CFrame * CFrame.new(5.24520874E-5, -106.229225, -29.8572197, 0.906307757, 0, -0.42261833, 0, 1, 0, 0.42261833, 0, 0.906307757)).Position else v10704 + Vector3.new(0, 0.20000000298023224, 0, 0);
+                local v10705 = l_FiveSeasonsFX_0.FinalExplosion:Clone();
+                v10705:ScaleTo(1.25);
+                v10705.Parent = workspace.Thrown;
+                v10705:PivotTo(CFrame.new(v10704));
+                v10705.Particles.Enabled.EnabledP.Enabled = true;
+                shared.sfx({
+                    SoundId = "rbxassetid://18462330981", 
+                    Parent = v10705.PrimaryPart, 
+                    Volume = 10, 
+                    RollOffMaxDistance = 2500, 
+                    RollOffMode = Enum.RollOffMode.LinearSquare
+                }):Play();
+                task.delay(10, function() --[[ Line: 18276 ]]
+                    v10705.Particles.Enabled.EnabledP.Enabled = false;
+                    task.wait(10);
+                    v10705:Destroy();
+                end);
+                for _, v10707 in pairs(v10705.Particles:GetDescendants()) do
+                    if v10707:IsA("ParticleEmitter") then
+                        v10707:Emit(v10707:GetAttribute("EmitCount"));
+                        task.spawn(function() --[[ Line: 18284 ]]
+                            local l_TimeScale_0 = v10707.TimeScale;
+                            v10707.TimeScale = 0.1;
+                            task.wait(0.11);
+                            v10707.TimeScale = l_TimeScale_0;
+                        end);
+                    end;
+                end;
+                local l_TweenService_17 = game:GetService("TweenService");
+                if v10657 then
+                    local v10710 = l_FiveSeasonsFX_0.ImpactFrameBlue:Clone();
+                    v10710.Parent = game.Lighting;
+                    v10710.Enabled = true;
+                    task.wait(0.03);
+                    v10710.Enabled = false;
+                end;
+                local function v10718() --[[ Line: 18310 ]] --[[ Name: SmokeTween ]]
+                    local v10711 = Random.new():NextNumber(0.5, 2.75);
+                    local v10712 = l_FiveSeasonsFX_0.FinalExplosion.SmokeMesh:Clone();
+                    local l_v10712_Scale_0 = v10712:GetScale();
+                    v10712:ScaleTo(Random.new():NextNumber(l_v10712_Scale_0 - 0.2, l_v10712_Scale_0 + 1));
+                    local v10714 = Vector3.new(math.random(0, 360), math.random(0, 360), math.random(0, 360));
+                    v10712:SetPrimaryPartCFrame(CFrame.new(v10712.PrimaryPart.Position) * CFrame.Angles(math.rad(v10714.x), math.rad(v10714.y), (math.rad(v10714.z))));
+                    local l_Start_295 = v10712.Start;
+                    local l_End_292 = v10712.End;
+                    local v10717 = l_Start_295:Clone();
+                    v10717.Transparency = 0;
+                    v10717.Name = "ClonedMesh";
+                    v10717.Transparency = 0.92;
+                    v10717.Parent = workspace.Thrown;
+                    l_TweenService_17:Create(v10717, TweenInfo.new(v10711, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                        Size = l_End_292.Size, 
+                        CFrame = l_End_292.CFrame
+                    }):Play();
+                    l_TweenService_17:Create(v10717, TweenInfo.new(v10711, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                        Transparency = 1
+                    }):Play();
+                    l_TweenService_17:Create(v10717, TweenInfo.new(v10711 / 4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                        Color = Color3.fromRGB(149, 149, 149)
+                    }):Play();
+                    task.wait(3);
+                    v10717:Destroy();
+                    v10712:Destroy();
+                end;
+                local _ = function() --[[ Line: 18347 ]] --[[ Name: WindRing ]]
+                    task.spawn(function() --[[ Line: 18348 ]]
+                        local v10719 = Random.new():NextNumber(0.3, 1.75);
+                        local v10720 = l_FiveSeasonsFX_0.FinalExplosion.WindRing:Clone();
+                        local l_v10720_Scale_0 = v10720:GetScale();
+                        v10720:ScaleTo(Random.new():NextNumber(l_v10720_Scale_0 - 0.65, l_v10720_Scale_0 + 0.65));
+                        local v10722 = math.random(0, 360);
+                        v10720:SetPrimaryPartCFrame(v10720.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(v10722), 0));
+                        local l_Start_296 = v10720.Start;
+                        local l_End_293 = v10720.End;
+                        local v10725 = l_Start_296:Clone();
+                        v10725.Decal.Transparency = 0.85;
+                        v10725.Name = "ClonedMesh";
+                        v10725.Parent = workspace.Thrown;
+                        l_TweenService_17:Create(v10725, TweenInfo.new(v10719, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                            Size = l_End_293.Size, 
+                            CFrame = l_End_293.CFrame
+                        }):Play();
+                        l_TweenService_17:Create(v10725.Mesh, TweenInfo.new(v10719, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                            Scale = l_End_293.Mesh.Scale
+                        }):Play();
+                        local _ = l_TweenService_17:Create(v10725.Decal, TweenInfo.new(v10719, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {
+                            Transparency = 1
+                        }):Play();
+                        task.wait(v10719);
+                        v10725:Destroy();
+                        v10720:Destroy();
+                    end);
+                end;
+                task.spawn(function() --[[ Line: 18391 ]]
+                    spawn(v10718);
+                    spawn(v10718);
+                    spawn(v10718);
+                    spawn(v10718);
+                    spawn(v10718);
+                    for _ = 1, 5 do
+                        task.spawn(function() --[[ Line: 18348 ]]
+                            local v10729 = Random.new():NextNumber(0.3, 1.75);
+                            local v10730 = l_FiveSeasonsFX_0.FinalExplosion.WindRing:Clone();
+                            local l_v10730_Scale_0 = v10730:GetScale();
+                            v10730:ScaleTo(Random.new():NextNumber(l_v10730_Scale_0 - 0.65, l_v10730_Scale_0 + 0.65));
+                            local v10732 = math.random(0, 360);
+                            v10730:SetPrimaryPartCFrame(v10730.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(v10732), 0));
+                            local l_Start_297 = v10730.Start;
+                            local l_End_294 = v10730.End;
+                            local v10735 = l_Start_297:Clone();
+                            v10735.Decal.Transparency = 0.85;
+                            v10735.Name = "ClonedMesh";
+                            v10735.Parent = workspace.Thrown;
+                            l_TweenService_17:Create(v10735, TweenInfo.new(v10729, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                                Size = l_End_294.Size, 
+                                CFrame = l_End_294.CFrame
+                            }):Play();
+                            l_TweenService_17:Create(v10735.Mesh, TweenInfo.new(v10729, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                                Scale = l_End_294.Mesh.Scale
+                            }):Play();
+                            local _ = l_TweenService_17:Create(v10735.Decal, TweenInfo.new(v10729, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {
+                                Transparency = 1
+                            }):Play();
+                            task.wait(v10729);
+                            v10735:Destroy();
+                            v10730:Destroy();
+                        end);
+                        task.wait(0.04);
+                    end;
+                end);
+            end);
+        end;
+    elseif v939 == "Five Season Camera" then
+        local l_char_31 = v938.char;
+        local _ = v938.id;
+        local l_bp_1 = v938.bp;
+        local _ = l_char_31.PrimaryPart;
+        local l_Folder_6 = Instance.new("Folder");
+        l_Folder_6.Name = "locatingtarg";
+        l_Folder_6.Parent = l_char_31;
+        game:GetService("Debris"):AddItem(l_Folder_6, 1);
+        local l_Part_8 = Instance.new("Part");
+        l_Part_8.Transparency = 1;
+        l_Part_8.CanCollide = false;
+        l_Part_8.Size = Vector3.new(1, 1, 1, 0);
+        l_Part_8.CanTouch = false;
+        l_Part_8.CanQuery = false;
+        local l_BodyVelocity_9 = Instance.new("BodyVelocity");
+        l_BodyVelocity_9.MaxForce = Vector3.new(1, 1, 1, 0) * 100000;
+        l_BodyVelocity_9.Velocity = Vector3.new(0, 0, 0, 0);
+        l_BodyVelocity_9.Parent = l_Part_8;
+        l_Part_8.CFrame = workspace.CurrentCamera.CFrame;
+        l_Part_8.CFrame = CFrame.lookAlong(l_Part_8.Position, l_Part_8.CFrame.LookVector * Vector3.new(1, 0, 1, 0));
+        l_Part_8.Parent = workspace.Thrown;
+        local l_CurrentCamera_11 = workspace.CurrentCamera;
+        l_CurrentCamera_11.CameraType = Enum.CameraType.Scriptable;
+        local l_Vector3Value_1 = Instance.new("Vector3Value");
+        local v10746 = tick();
+        local l_NumberValue_7 = Instance.new("NumberValue");
+        l_NumberValue_7.Value = 0;
+        local l_NumberValue_8 = Instance.new("NumberValue");
+        l_NumberValue_8.Value = 125;
+        local l_NumberValue_9 = Instance.new("NumberValue");
+        l_NumberValue_9.Value = 100;
+        v10:Create(l_NumberValue_9, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            Value = 0
+        }):Play();
+        v10:Create(l_NumberValue_8, TweenInfo.new(10, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            Value = 0
+        }):Play();
+        v10:Create(l_NumberValue_7, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            Value = -90
+        }):Play();
+        v10:Create(l_CurrentCamera_11, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            FieldOfView = 40
+        }):Play();
+        do
+            local l_v10746_0 = v10746;
+            local v10752 = shared.loop(function() --[[ Line: 18452 ]]
+                local v10751 = tick() - l_v10746_0;
+                l_v10746_0 = tick();
+                l_CurrentCamera_11.CameraType = Enum.CameraType.Scriptable;
+                l_BodyVelocity_9.Velocity = l_BodyVelocity_9.Velocity:lerp(l_char_31.Humanoid.MoveDirection * l_NumberValue_8.Value + Vector3.new(0, l_NumberValue_9.Value, 0), 1 - 5.0E-7 ^ v10751);
+            end, 90);
+            local v10754 = game:GetService("RunService").RenderStepped:Connect(function(v10753) --[[ Line: 18462 ]]
+                l_CurrentCamera_11.CFrame = l_CurrentCamera_11.CFrame:lerp(l_Part_8.CFrame * CFrame.Angles(math.rad(l_NumberValue_7.Value), 0, 0), 1 - 5.0E-5 ^ v10753);
+            end);
+            local v10755 = {};
+            for _, v10757 in pairs(l_char_31:GetDescendants()) do
+                if v10757:IsA("BasePart") then
+                    v10755[v10757] = v10757.CastShadow;
+                    v10757.CastShadow = false;
+                end;
+            end;
+            local v10758 = tick();
+            repeat
+                task.wait();
+            until tick() - v10758 > 5 or l_char_31:FindFirstChild("HurryUPFS");
+            task.delay(0.75, function() --[[ Line: 18476 ]]
+                for v10759, v10760 in pairs(v10755) do
+                    v10759.CastShadow = v10760;
+                end;
+            end);
+           
+            l_char_31:PivotTo(l_Part_8.CFrame);
+            v10754:Disconnect();
+            v10752();
+            l_Vector3Value_1:Destroy();
+            l_NumberValue_8:Destroy();
+            l_BodyVelocity_9:Destroy();
+            l_Part_8:Destroy();
+            l_char_31:PivotTo(l_Part_8.CFrame);
+        end;
+    elseif v939 == "Five Season Startup" then
+        local l_char_32 = v938.char;
+        local _ = v938.id;
+        local l_TweenService_18 = game:GetService("TweenService");
+        local l_FiveSeasonsFX_1 = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX;
+        local l_Thrown_18 = workspace.Thrown;
+        local v10766 = shared.sfx({
+            SoundId = "rbxassetid://18460952794", 
+            Volume = 0
+        });
+        v9:AddTag(v10766, "kjfs" .. l_char_32.Name);
+        if l_char_32 == l_LocalPlayer_0.Character then
+            v10766.Parent = workspace;
+            task.delay(0.9, function() --[[ Line: 18508 ]]
+                local l_Folder_7 = Instance.new("Folder");
+                l_Folder_7.Name = "NoRotate";
+                l_Folder_7.Parent = l_char_32;
+                local v10768 = 0;
+                local v10769 = nil;
+                local v10770 = 0;
+                local v10771 = FSSU or require(l_Cutscenes_0["Five Season Startup"]);
+                if not FSSU then
+                    FSSU = v10771;
+                end;
+                local l_CurrentCamera_12 = workspace.CurrentCamera;
+                l_CurrentCamera_12.CameraType = Enum.CameraType.Scriptable;
+                
+                local l_Character_18 = l_LocalPlayer_0.Character;
+                local l_PrimaryPart_53 = l_char_32.PrimaryPart;
+                local v10775 = tick();
+                local v10776 = nil;
+                local v10777 = nil;
+                v10769 = game:GetService("RunService").RenderStepped:Connect(function(v10778) --[[ Line: 18532 ]]
+                    local v10779 = v10778 * 60;
+                    v10768 = v10768 + v10779;
+                    local v10780 = tonumber((math.ceil(v10768)));
+                    if v10780 >= 340 and not v10776 then
+                        v10776 = l_PrimaryPart_53.CFrame;
+                    end;
+                    local v10781 = v10771[v10780];
+                    if l_Character_18.Parent and v10781 and not l_Character_18:FindFirstChild("locatingtarg") then
+                        if l_CurrentCamera_12.CameraType ~= Enum.CameraType.Scriptable then
+                            l_CurrentCamera_12.CameraType = Enum.CameraType.Scriptable;
+                        end;
+                        v10770 = v10770 + v10779;
+                        if v10781 and not v10776 then
+                            if tick() - v10775 > 1 then
+                                local l_l_CurrentCamera_12_0 = l_CurrentCamera_12;
+                                local l_FieldOfView_4 = l_CurrentCamera_12.FieldOfView;
+                                local l_fov_2 = v10781.fov;
+                                local v10785 = 1 - 9.0E-25 ^ v10778;
+                                l_l_CurrentCamera_12_0.FieldOfView = l_FieldOfView_4 + (l_fov_2 - l_FieldOfView_4) * v10785;
+                            else
+                                local l_l_CurrentCamera_12_1 = l_CurrentCamera_12;
+                                local l_FieldOfView_5 = l_CurrentCamera_12.FieldOfView;
+                                local l_fov_3 = v10781.fov;
+                                local v10789 = 1 - 9.0E-7 ^ v10778;
+                                l_l_CurrentCamera_12_1.FieldOfView = l_FieldOfView_5 + (l_fov_3 - l_FieldOfView_5) * v10789;
+                            end;
+                        end;
+                        if v10781 then
+                            local v10790 = (v10776 or l_PrimaryPart_53.CFrame) * v10781.cframe;
+                            local v10791 = nil;
+                            if v10777 and (v10777.Position - v10790.Position).magnitude >= 10 then
+                                v10791 = true;
+                            end;
+                            v10777 = v10790;
+                            if v10791 then
+                                l_CurrentCamera_12.CFrame = v10790;
+                                return;
+                            elseif tick() - v10775 > 1 then
+                                l_CurrentCamera_12.CFrame = l_CurrentCamera_12.CFrame:lerp(v10790, 1 - 9.0E-25 ^ v10778);
+                                return;
+                            else
+                                l_CurrentCamera_12.CFrame = l_CurrentCamera_12.CFrame:lerp(v10790, 1 - 9.0E-7 ^ v10778);
+                                return;
+                            end;
+                        end;
+                    else
+                        l_Folder_7:Destroy();
+                        v10769:Disconnect();
+                      
+                        l_CurrentCamera_12.CameraType = Enum.CameraType.Custom;
+                    end;
+                end);
+            end);
+            v10:Create(v10766, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                Volume = 2
+            }):Play();
+            v10766:Play();
+        end;
+        task.spawn(function() --[[ Line: 18600 ]]
+            local v10792 = l_FiveSeasonsFX_1.CharFX.HeatUp:Clone();
+            v10792.Parent = l_char_32.HumanoidRootPart;
+            for _, v10794 in pairs(v10792:GetDescendants()) do
+                if v10794:IsA("ParticleEmitter") then
+                    v10794:Emit(v10794:GetAttribute("EmitCount"));
+                end;
+            end;
+            v10792.Wisps.Enabled = true;
+            task.wait(1);
+            v10792.Wisps.Enabled = false;
+        end);
+        task.delay(1.15, function() --[[ Line: 18610 ]]
+            task.spawn(function() --[[ Line: 18613 ]]
+                local v10795 = l_FiveSeasonsFX_1.JumpMeshes:Clone();
+                v10795:SetPrimaryPartCFrame(l_char_32.HumanoidRootPart.CFrame);
+                v10795.Parent = l_Thrown_18;
+                task.delay(0.075, function() --[[ Line: 18618 ]]
+                    for _, v10797 in pairs(v10795.Lines:GetDescendants()) do
+                        if v10797:IsA("ParticleEmitter") then
+                            v10797:Emit(v10797.Name);
+                        end;
+                    end;
+                end);
+                task.spawn(function() --[[ Line: 18622 ]]
+                    local v10798 = v10795.Main:Clone();
+                    local l_Start_298 = v10798.Start;
+                    local l_End_295 = v10798.End;
+                    local v10801 = l_Start_298:Clone();
+                    v10801.Transparency = 0.95;
+                    v10801.Name = "ClonedMesh";
+                    v10801.Parent = v10795.CurrentTweens;
+                    l_TweenService_18:Create(v10801, TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        CFrame = l_End_295.CFrame
+                    }):Play();
+                    l_TweenService_18:Create(v10801, TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Size = l_End_295.Size
+                    }):Play();
+                    task.wait(0.75);
+                    v10801:Destroy();
+                end);
+                task.spawn(function() --[[ Line: 18643 ]]
+                    local v10802 = v10795.Wind3:Clone();
+                    local l_Start_299 = v10802.Start;
+                    local l_End_296 = v10802.End;
+                    local v10805 = l_Start_299:Clone();
+                    v10805.Transparency = 0.75;
+                    v10805.Name = "ClonedMesh";
+                    v10805.Parent = v10795.CurrentTweens;
+                    l_TweenService_18:Create(v10805, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        CFrame = l_End_296.CFrame, 
+                        Size = l_End_296.Size
+                    }):Play();
+                    l_TweenService_18:Create(v10805, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Transparency = 1
+                    }):Play();
+                    task.wait(0.8);
+                    v10805:Destroy();
+                end);
+                task.spawn(function() --[[ Line: 18663 ]]
+                    local v10806 = v10795.Wind2:Clone();
+                    local l_Start_300 = v10806.Start;
+                    local l_End_297 = v10806.End;
+                    local v10809 = l_Start_300:Clone();
+                    v10809.Transparency = 0.8;
+                    v10809.Name = "ClonedMesh";
+                    v10809.Parent = v10795.CurrentTweens;
+                    l_TweenService_18:Create(v10809, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                        CFrame = l_End_297.CFrame
+                    }):Play();
+                    l_TweenService_18:Create(v10809, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                        Size = l_End_297.Size, 
+                        Transparency = 1
+                    }):Play();
+                    task.wait(0.55);
+                    v10809:Destroy();
+                end);
+                local function v10816() --[[ Line: 18684 ]] --[[ Name: WindFX2 ]]
+                    task.spawn(function() --[[ Line: 18685 ]]
+                        local v10810 = v10795.WindDecal2:Clone();
+                        v10810:ScaleTo(Random.new():NextNumber(0.95, 2.35));
+                        local v10811 = Random.new():NextNumber(1, 2.75);
+                        local v10812 = math.random(0, 360);
+                        v10810:SetPrimaryPartCFrame(v10810.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(v10812), 0));
+                        v10810.End.CFrame = v10810.End.CFrame * CFrame.Angles(0, math.rad(v10812), 0);
+                        local l_Start_301 = v10810.Start;
+                        local l_End_298 = v10810.End;
+                        local v10815 = l_Start_301:Clone();
+                        v10815.Decal.Transparency = Random.new():NextNumber(0.8, 0.93);
+                        v10815.Name = "ClonedMesh";
+                        v10815.Parent = v10795.CurrentTweens;
+                        l_TweenService_18:Create(v10815, TweenInfo.new(v10811, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                            Size = l_End_298.Size, 
+                            CFrame = l_End_298.CFrame
+                        }):Play();
+                        l_TweenService_18:Create(v10815.Mesh, TweenInfo.new(v10811, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                            Scale = l_End_298.Mesh.Scale
+                        }):Play();
+                        l_TweenService_18:Create(v10815.Decal, TweenInfo.new(v10811, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            Transparency = 1
+                        }):Play();
+                        task.wait(4);
+                        v10815:Destroy();
+                    end);
+                end;
+                for _ = 1, 5 do
+                    spawn(v10816);
+                    task.wait(0.035);
+                end;
+                task.wait(5);
+                v10795:Destroy();
+            end);
+            local v10818 = l_FiveSeasonsFX_1.JumpFX:Clone();
+            v10818:SetPrimaryPartCFrame(l_char_32.HumanoidRootPart.CFrame);
+            v10818.Parent = l_Thrown_18;
+            for _, v10820 in pairs(v10818.JumpFX:GetDescendants()) do
+                if v10820:IsA("ParticleEmitter") then
+                    v10820:Emit(v10820:GetAttribute("EmitCount"));
+                end;
+            end;
+            v10818.JumpFX.EnabledP.Enabled = true;
+            local l_Highlight_1 = Instance.new("Highlight");
+            l_Highlight_1.FillColor = Color3.fromRGB(255, 66, 28);
+            l_Highlight_1.OutlineColor = Color3.fromRGB(255, 44, 2);
+            l_Highlight_1.FillTransparency = 0.5;
+            l_Highlight_1.OutlineTransparency = 0.6;
+            l_Highlight_1.DepthMode = "Occluded";
+            l_Highlight_1.Parent = l_char_32;
+            l_TweenService_18:Create(l_Highlight_1, TweenInfo.new(0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {
+                FillTransparency = 1, 
+                OutlineTransparency = 1
+            }):Play();
+            local v10822 = l_FiveSeasonsFX_1.CharFX.BeamFX:Clone();
+            v10822.Parent = l_char_32.Torso;
+            for _, v10824 in pairs(v10822.Beams:GetDescendants()) do
+                if v10824:IsA("Beam") then
+                    v10824.Enabled = true;
+                    v10824.TextureLength = v10824.TextureLength + Random.new():NextNumber(0.25, -0.25);
+                end;
+            end;
+            task.wait(1.275);
+            l_TweenService_18:Create(v10822, TweenInfo.new(0.85, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                Position = Vector3.new(0, 0, 1, 0)
+            }):Play();
+            for _, v10826 in pairs(v10822.Beams:GetDescendants()) do
+                if v10826:IsA("Beam") then
+                    l_TweenService_18:Create(v10826, TweenInfo.new(0.9, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                        Brightness = 0, 
+                        Width0 = 0, 
+                        Width1 = 0, 
+                        CurveSize1 = 0, 
+                        CurveSize0 = 0, 
+                        TextureSpeed = v10826.TextureSpeed / 3
+                    }):Play();
+                    l_TweenService_18:Create(v10826, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                        Brightness = 0
+                    }):Play();
+                end;
+            end;
+            for _, v10828 in pairs(v10822:GetDescendants()) do
+                if v10828:IsA("Attachment") and v10828.Name == "tipat2" then
+                    l_TweenService_18:Create(v10828, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                        Position = Vector3.new(0, 0, -1.5, 0)
+                    }):Play();
+                end;
+            end;
+            task.wait(0.5);
+            v10818.JumpFX.EnabledP.Enabled = false;
+            task.wait(4);
+            v10822:Destroy();
+            v10818:Destroy();
+            l_Highlight_1:Destroy();
+        end);
+        local v10829 = l_FiveSeasonsFX_1.FXUi:Clone();
+        local l_Vignette_1 = v10829.Vignette;
+        local v10831 = l_FiveSeasonsFX_1.HandFire:Clone();
+        task.delay(1.95, function() --[[ Line: 18778 ]]
+            v10829.Parent = l_LocalPlayer_0.PlayerGui;
+            l_TweenService_18:Create(l_Vignette_1, TweenInfo.new(1.65, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                ImageTransparency = 0
+            }):Play();
+            v10831:SetPrimaryPartCFrame(l_char_32["Left Arm"].CFrame);
+            v10831.Parent = l_Thrown_18;
+            v10831.ArmWeld.Part0 = l_char_32["Left Arm"];
+            v10831.ArmWeld.Part1 = v10831.Primary;
+        end);
+        local v10832 = l_FiveSeasonsFX_1.ShadowDecal:Clone();
+        local v10833 = l_FiveSeasonsFX_1.ShadowDecal2:Clone();
+        v10832.Face = "Bottom";
+        v10833.Face = "Bottom";
+        task.delay(3.25, function() --[[ Line: 18794 ]]
+            local v10834 = l_FiveSeasonsFX_1.CharFX.WindupGlow:Clone();
+            v10834.Parent = l_char_32["Left Arm"];
+            for _, v10836 in pairs(v10834:GetDescendants()) do
+                if v10836:IsA("ParticleEmitter") then
+                    v10836:Emit(v10836:GetAttribute("EmitCount"));
+                end;
+            end;
+            v10832.Parent = l_char_32["Left Arm"];
+            v10833.Parent = l_char_32["Left Arm"];
+            l_TweenService_18:Create(v10833, TweenInfo.new(0.9, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {
+                Transparency = 0.7
+            }):Play();
+            task.wait(0.2);
+            l_TweenService_18:Create(v10832, TweenInfo.new(0.9, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {
+                Transparency = 0.75
+            }):Play();
+            task.wait(8);
+            v10832:Destroy();
+            v10833:Destroy();
+            v10834:Destroy();
+        end);
+        task.delay(3.545, function() --[[ Line: 18815 ]]
+            for _, v10838 in pairs(v10831.FX:GetChildren()) do
+                if v10838:IsA("ParticleEmitter") then
+                    v10838.Enabled = false;
+                end;
+            end;
+            for _, v10840 in pairs(v10831.Emit:GetChildren()) do
+                if v10840:IsA("ParticleEmitter") then
+                    v10840:Emit(v10840:GetAttribute("EmitCount"));
+                end;
+            end;
+            task.wait(1);
+            v10831:Destroy();
+        end);
+        local v10841 = l_FiveSeasonsFX_1.CharFX.ArmFX:Clone();
+        local v10842 = l_FiveSeasonsFX_1.CharFX.ArmBurst:Clone();
+        task.delay(4.3, function() --[[ Line: 18825 ]]
+            v10841.Parent = l_char_32["Left Arm"];
+            v10842.Parent = l_char_32["Left Arm"];
+            for _, v10844 in pairs(v10842:GetDescendants()) do
+                if v10844:IsA("ParticleEmitter") then
+                    v10844:Emit(v10844:GetAttribute("EmitCount"));
+                end;
+            end;
+            local v10845 = l_FiveSeasonsFX_1.FSRed:Clone();
+            v10845.Parent = game.Lighting;
+            local v10846 = l_FiveSeasonsFX_1.FSWhite:Clone();
+            v10846.Parent = game.Lighting;
+            local v10847 = l_FiveSeasonsFX_1.FSBlack:Clone();
+            v10847.Parent = game.Lighting;
+            v10845.Enabled = true;
+            task.wait(0.035);
+            v10845.Enabled = false;
+            v10846.Enabled = true;
+            task.wait(0.035);
+            v10846.Enabled = false;
+            v10847.Enabled = true;
+            task.wait(0.035);
+            v10847.Enabled = false;
+            v10845:Destroy();
+            v10846:Destroy();
+            v10847:Destroy();
+            l_TweenService_18:Create(v10833, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Transparency = 1
+            }):Play();
+            l_TweenService_18:Create(v10832, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Transparency = 1
+            }):Play();
+            task.wait(6);
+            v10841:Destroy();
+        end);
+        task.delay(5.7, function() --[[ Line: 18863 ]]
+            for _, v10849 in pairs(v10841:GetDescendants()) do
+                if v10849:IsA("ParticleEmitter") then
+                    v10849.Enabled = false;
+                end;
+            end;
+        end);
+        task.delay(5.92, function() --[[ Line: 18867 ]]
+            local v10850 = l_FiveSeasonsFX_1.CharFX.WindupSpark:Clone();
+            v10850.Parent = l_char_32["Left Arm"];
+            for _ = 1, 8 do
+                v10850.WindupSpark:Emit(5);
+                task.wait(0.035);
+            end;
+            task.wait(1);
+            v10850:Destroy();
+        end);
+        local v10852 = l_FiveSeasonsFX_1.CharFX.ArmEnabled:Clone();
+        task.delay(6.42, function() --[[ Line: 18880 ]]
+            v10852.Parent = l_char_32["Left Arm"];
+            local v10853 = l_FiveSeasonsFX_1.CharFX.EyeEmit:Clone();
+            v10853.Parent = l_char_32.Head;
+            for _, v10855 in pairs(v10853:GetDescendants()) do
+                if v10855:IsA("ParticleEmitter") then
+                    v10855:Emit(v10855:GetAttribute("EmitCount"));
+                end;
+            end;
+            v10842.Parent = l_char_32["Left Arm"];
+            for _, v10857 in pairs(v10842:GetDescendants()) do
+                if v10857:IsA("ParticleEmitter") then
+                    v10857:Emit(v10857:GetAttribute("EmitCount"));
+                end;
+            end;
+            local v10858 = l_FiveSeasonsFX_1.FSRed:Clone();
+            v10858.Parent = game.Lighting;
+            local v10859 = l_FiveSeasonsFX_1.FSWhite:Clone();
+            v10859.Parent = game.Lighting;
+            local v10860 = l_FiveSeasonsFX_1.FSBlack:Clone();
+            v10860.Parent = game.Lighting;
+            v10829.Vignette.Visible = false;
+            for _, v10862 in pairs(l_LocalPlayer_0.PlayerGui:GetChildren()) do
+                if v10862.Name == "FXUi" and v10862 ~= v10829 then
+                    v10862:Destroy();
+                end;
+            end;
+            v10858.Enabled = true;
+            task.wait(0.035);
+            v10858.Enabled = false;
+            v10859.Enabled = true;
+            task.wait(0.035);
+            v10859.Enabled = false;
+            v10860.Enabled = true;
+            task.wait(0.035);
+            v10860.Enabled = false;
+            v10858:Destroy();
+            v10859:Destroy();
+            v10860:Destroy();
+            local l_Highlight_2 = Instance.new("Highlight");
+            l_Highlight_2.FillColor = Color3.fromRGB(0, 0, 0);
+            l_Highlight_2.OutlineColor = Color3.fromRGB(167, 0, 0);
+            l_Highlight_2.FillTransparency = 0;
+            l_Highlight_2.OutlineTransparency = 0;
+            l_Highlight_2.DepthMode = "Occluded";
+            l_Highlight_2.Parent = l_char_32;
+            l_TweenService_18:Create(l_Highlight_2, TweenInfo.new(0.65, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {
+                FillTransparency = 1, 
+                OutlineTransparency = 1
+            }):Play();
+            local v10864 = l_FiveSeasonsFX_1.FinalCC:Clone();
+            v10864.Parent = game.Lighting;
+            l_TweenService_18:Create(v10864, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                TintColor = Color3.fromRGB(255, 255, 255), 
+                Brightness = 0, 
+                Contrast = 0
+            }):Play();
+            task.wait(4);
+            v10829.Vignette.Visible = false;
+            v10842:Destroy();
+            v10852:Destroy();
+            v10864:Destroy();
+            v10853:Destroy();
+            l_Highlight_2:Destroy();
+        end);
+        task.delay(8.25, function() --[[ Line: 18949 ]]
+            if l_LocalPlayer_0.Character ~= l_char_32 then
+                v10829:Destroy();
+            end;
+            v10852:Destroy();
+        end);
+        local tool = Instance.new("Tool")
+
+-- Set the tool's properties
+tool.Name = "Five Seasons"
+tool.RequiresHandle = false  -- Set to true if you have a handle part
+tool.CanBeDropped = true     -- Change as needed
+
+-- Add a description or other properties
+tool.ToolTip = "idk"
+
+tool.Activated:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    local sound = Instance.new("Sound", game:GetService("SoundService"))
+            sound.Looped = false
+            sound.SoundId = "rbxassetid://18460863844"
+            sound.Playing = true
+            sound.Volume = 3
+            wait(0.1)
+spawn(function()
+            wait(7)
+            local SoundTP = Instance.new("Sound", game:GetService("SoundService"))
+            SoundTP.SoundId = "rbxassetid://18461671633"
+            SoundTP.Playing = true 
+            SoundTP.Volume = 2
+            wait(1)
+            shared.repfire({
+                ["Effect"] = "Five Season Camera",
+                ["char"] = game.Players.LocalPlayer.Character
+            })
+        end)
+        spawn(function()
+            local sound2 = Instance.new("Sound", game:GetService("SoundService"))
+            sound2.Looped = false
+            sound2.SoundId = "rbxassetid://18460952794"
+            sound2.Volume = 0.7
+            sound2:Play()
+            wait(3.4)
+            local Audio_first_part_voiceline = Instance.new("Sound")
+           Audio_first_part_voiceline.SoundId = "rbxassetid://18460893321"
+           Audio_first_part_voiceline.Parent = game.Players.LocalPlayer.Character.Head
+		Audio_first_part_voiceline.Volume = 1.5
+		Audio_first_part_voiceline:Play()
+		
+            
+            wait(10)
+shared.repfire({
+                ["Effect"] = "Five Season Atk",
+                ["char"] = game.Players.LocalPlayer.Character
+            })
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://18462894593"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+Anim.AnimationId = "rbxassetid://0"
+k:Play()
+            local bringsound = Instance.new("Sound", game.Players.LocalPlayer.Character)
+            bringsound.SoundId = "rbxassetid://18461820786"
+            bringsound.Playing = true
+            bringsound.Volume = 2
+        end)
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://18462892217"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+Anim.AnimationId = "rbxassetid://0"
+k:Play()
+
+shared.repfire({
+                ["Effect"] = "Five Season Startup",
+                ["char"] = game.Players.LocalPlayer.Character
+            })
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+
