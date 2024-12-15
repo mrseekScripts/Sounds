@@ -711,7 +711,7 @@ end)
         end
     end
     
-         if Hitted.Humanoid.Health < 15 or Hitted.Humanoid.Health == 15 then
+         if Hitted.Humanoid.Health < 25 or Hitted.Humanoid.Health == 25 then
                                 BodyV.Velocity = Humanoid.RootPart.CFrame.LookVector * 300 + Humanoid.RootPart.CFrame.UpVector * 100
                                 shared.repfire({
                                     Effect = "Wall Collision", 
